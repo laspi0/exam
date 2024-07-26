@@ -6,7 +6,7 @@
 </ul>
 
 <h3>Ajouter un étudiant</h3>
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" #etudiantForm="ngForm">
   <input [(ngModel)]="newEtudiant.code" name="code" placeholder="Code" required>
   <input [(ngModel)]="newEtudiant.prenom" name="prenom" placeholder="Prénom" required>
   <input [(ngModel)]="newEtudiant.datenaissance" name="datenaissance" type="date" required>
@@ -15,7 +15,7 @@
     <option value="">Sélectionnez une classe</option>
     <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
   </select>
-  <button type="submit">Ajouter</button>
+  <button type="submit" [disabled]="!etudiantForm.form.valid">Ajouter</button>
 </form>
 
 <h3>Filtrer par classe</h3>
