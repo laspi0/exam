@@ -1,0 +1,25 @@
+<h2>Liste des étudiants</h2>
+<ul>
+  <li *ngFor="let etudiant of etudiants">
+    {{ etudiant.prenom }} - Classe: {{ etudiant.classe.nom }}
+  </li>
+</ul>
+
+<h3>Ajouter un étudiant</h3>
+<form (ngSubmit)="onSubmit()">
+  <input [(ngModel)]="newEtudiant.code" name="code" placeholder="Code" required>
+  <input [(ngModel)]="newEtudiant.prenom" name="prenom" placeholder="Prénom" required>
+  <input [(ngModel)]="newEtudiant.datenaissance" name="datenaissance" type="date" required>
+  <input [(ngModel)]="newEtudiant.adresse" name="adresse" placeholder="Adresse" required>
+  <select [(ngModel)]="newEtudiant.classe_id" name="classe_id" required>
+    <option value="">Sélectionnez une classe</option>
+    <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
+  </select>
+  <button type="submit">Ajouter</button>
+</form>
+
+<h3>Filtrer par classe</h3>
+<select [(ngModel)]="classeId" (change)="filterByClasse()">
+  <option value="">Toutes les classes</option>
+  <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
+</select>

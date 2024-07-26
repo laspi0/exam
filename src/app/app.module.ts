@@ -1,19 +1,30 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EtudiantComponent } from './components/etudiant/etudiant.component';
+
+const routes: Routes = [
+  { path: 'etudiants', component: EtudiantComponent },
+  { path: '', redirectTo: '/etudiants', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EtudiantComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
-    provideClientHydration()
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
